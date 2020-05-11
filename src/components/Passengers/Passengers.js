@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // THIS COMPONENT IS OUR INTERFACE FOR PASSENGER CHECK IN
 // YOU SHOULD DISPLAY THE CURRENT PASSENGERS
 // INPUT SHOULD COLLECT INFO, BUTTON SHOULD ADD THEM TO THE LIST
@@ -29,7 +30,7 @@ class Passengers extends Component {
         <button onClick={event => this.handleClick(event, 'person')}>Add Passenger</button>
 
     <ul>PASSENGER LIST:
-       {this.props.people.map(person => <li key={person}>{person}</li>)}
+       {this.props.reduxState.people.map(person => <li key={person}>{person}</li>)}
 
     </ul>
       
@@ -37,5 +38,5 @@ class Passengers extends Component {
     )
   }
 }
-
-export default Passengers;
+const reduxOnDOM = reduxState => ({ reduxState });
+export default connect(reduxOnDOM)(Passengers);

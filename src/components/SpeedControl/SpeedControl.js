@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // THIS COMPONENT IS OUR INTERFACE FOR SPEED
 // YOU SHOULD DISPLAY THE CURRENT SPEED
 // BUTTONS SHOULD INCREASE OR DECREASE SPEED, RESPECTIVELY
@@ -21,11 +22,11 @@ class SpeedControl extends Component {
         <h2>Speed Control</h2>
 
         <button onClick={event => this.handleClick(event, 'up')}>Increase Speed</button>
-        <p>SPEED: {this.props.speed.speed}</p>
+        <p>SPEED: {this.props.reduxState.speed}</p>
         <button onClick={event => this.handleClick(event, 'down')}>Decrease Speed</button>
       </div>
     )
   }
 }
-
-export default SpeedControl;
+const reduxOnDOM = reduxState => ({ reduxState });
+export default connect(reduxOnDOM)(SpeedControl);

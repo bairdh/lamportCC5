@@ -13,18 +13,27 @@ const shipStats = {
 // put your reducer here!
 const reducer = (state = shipStats, action) => {
     if(action.type === 'up'){
-        state.speed += 1;
+        state = {
+            ...state,
+            speed: state.speed + 1
+        }
         console.log(state.speed);
         return state
     }
     else if (action.type === 'down'){
-        state.speed -= 1;
+        state = {
+            ...state,
+            speed: state.speed - 1
+        }
         console.log(state.speed);
         
     }
 
     else if(action.type === 'person'){
-        state.people = [...state.people, action.payload];
+        state = {
+            ...state,
+            people: [...state.people, action.payload]
+        }
         console.log(`In the List`);
         
     }
