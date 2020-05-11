@@ -4,6 +4,8 @@ import reduxLogo from './redux.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 // components
 import SpeedControl from '../SpeedControl/SpeedControl';
 import Passengers from '../Passengers/Passengers';
@@ -12,6 +14,8 @@ import Dashboard from '../Dashboard/Dashboard';
 
 class App extends Component {
   render() {
+    console.log(this.props.reduxState);
+    
     return (
       <Router>
           <div className="App">
@@ -29,15 +33,24 @@ class App extends Component {
             </header>
 
             <div className="content-container">
-              <Route exact path="/" component={SpeedControl} />
-              <Route path="/passengers" component={Passengers} />
-              <Route path="/dashboard" component={Dashboard} />
+              <Route exact path="/" 
+                      render={props => <SpeedControl {...props} 
+                                          dispatch={this.props.dispatch} 
+                                          speed={this.props.reduxState}/>} />
+              <Route path="/passengers" 
+                      render={props => <Passengers {...props} 
+                                          dispatch={this.props.dispatch} 
+                                          people={this.props.reduxState.people}/>} />
+              <Route path="/dashboard" 
+                      render={props => <Dashboard {...props} 
+                                          dispatch={this.props.dispatch} 
+                                          shipStats={this.props.reduxState} />} />
             </div>
-
           </div>
       </Router>
     );
   }
 }
 
-export default App;
+const reduxOnDOM = reduxState => ({reduxState});
+export default connect(reduxOnDOM)(App);

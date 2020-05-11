@@ -10,8 +10,8 @@ class Dashboard extends Component {
       <div>
         <h2>Dashboard</h2>
         
-        <p>SPEED: GOES HERE</p>
-        <p>PASSENGER COUNT: GOES HERE</p>
+    <p>SPEED: {this.props.shipStats.speed}</p>
+    <p>PASSENGER COUNT: {this.props.shipStats.people.length}</p>
       </div>
     )
   }

@@ -4,15 +4,34 @@ import React, { Component } from 'react';
 // INPUT SHOULD COLLECT INFO, BUTTON SHOULD ADD THEM TO THE LIST
 
 class Passengers extends Component {
+
+  state = {
+    name: ''
+  }
+
+  handleChange = event => {
+    this.setState({
+      name: event.target.value
+    })
+  }
+ 
+  handleClick = (event, prop) =>{
+     this.props.dispatch({type: prop, payload:this.state.name})     
+  }
+
+
   render() {
     return (
       <div>
         <h2>Passengers</h2>
 
-        <input type="text" name="name" placeholder="Enter Name" />
-        <button>Add Passenger</button>
+        <input onChange={event => this.handleChange(event)} type="text" name="name" placeholder="Enter Name" />
+        <button onClick={event => this.handleClick(event, 'person')}>Add Passenger</button>
 
-        <ul>PASSENGER LIST: GOES HERE</ul>
+    <ul>PASSENGER LIST:
+       {this.props.people.map(person => <li key={person}>{person}</li>)}
+
+    </ul>
       
       </div>
     )
